@@ -8,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +56,7 @@ public class MainActivity extends ActionBarActivity {
      * A placeholder fragment containing a simple view.
      */
     public static class PlaceholderFragment extends Fragment {
+        ArrayAdapter< String > mForecastAdapter;
 
         public PlaceholderFragment() {
         }
@@ -65,12 +68,13 @@ public class MainActivity extends ActionBarActivity {
 
             // Forecast Array, that will be turned into an array List of strings
             String [] forecastArray = new String[]{
-                    "Today - Sunny - 88 / 63",
+                    "Today - Sunny - 80 / 63",
                     "Tomorrow - Cloudy - 45 / 43",
                     "Weds - Sunny - 78 / 63",
                     "Thurs - Sunny - 85 / 63",
                     "Fri - Sunny - 22 / 11",
-                    "Sat - Sunny - 34 / 34"
+                    "Sat - Sunny - 34 / 34",
+                    "Sun - Snow  - 44 / 67"
             };
 
             List<String> weekForecast = new ArrayList<String>(
@@ -82,7 +86,18 @@ public class MainActivity extends ActionBarActivity {
              *  2. Give it a data source arraylist to populate the ListView it's attached to.
              */
 
+            mForecastAdapter =
+                    new ArrayAdapter<String>(
+                            getActivity(), // Get application current context
+                            R.layout.list_item_forecast, // Listview layout
+                            R.id.list_item_forecast_TextView, // Listview textviews to populate
+                            weekForecast);
 
+            // Get a reference to the ListView, and attach an adapter to this
+            ListView listView;
+            listView = (ListView)
+                    rootView.findViewById(R.id.listview_forecast);
+            listView.setAdapter(mForecastAdapter);
 
             return rootView;
         }

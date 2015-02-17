@@ -1,5 +1,6 @@
 package com.example.bigsleek.sunshine.app;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -56,7 +57,7 @@ public class ForecastFragment extends Fragment {
 
         if (id == R.id.action_refresh) {
             FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
-            fetchWeatherTask.execute();
+            fetchWeatherTask.execute("02453");
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -105,19 +106,37 @@ public class ForecastFragment extends Fragment {
         return rootView;
     }
 
-    public class FetchWeatherTask extends AsyncTask<Void, Void, Void> {
+    public class FetchWeatherTask extends AsyncTask<String, Void, Void> {
 
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+        String mode = "json";
+        String unit = "metric";
+        int days = 7;
+
 
         @Override
-        protected Void doInBackground(Void... params) {
+        protected Void doInBackground(String... params) {
 
             HttpURLConnection connection = null;
             BufferedReader reader     = null;
             String forecastJsonStr    = null;
+            final String BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily";
+            final String QUERY_PARAM = "q";
+            final String FORMAT_PARAM = "mode";
+            final String UNIT_PARAM = "mode";
+            final String DAYS_PARAM = "cnt";
 
             try {
-                URL url    = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=02453&mode=json&units=metric&cnt=7");
+                Uri builtUrl = Uri.parse(BASE_URL).buildUpon()
+                    .appendQueryParameter(QUERY_PARAM, params[0])
+                    .appendQueryParameter(FORMAT_PARAM, mode)
+                    .appendQueryParameter(UNIT_PARAM, unit)
+                    .appendQueryParameter(DAYS_PARAM, Integer.toString(days))
+                    .build();
+
+                //URL url    = new URL("http://api.openweathermap.org/data/2.5/forecast/daily?q=02453&mode=json&units=metric&cnt=7");
+                URL url = new URL(builtUrl.toString());
+                Log.v(LOG_TAG, "Base URI: " + builtUrl);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.connect();
@@ -133,7 +152,6 @@ public class ForecastFragment extends Fragment {
 
                 reader = new BufferedReader(new InputStreamReader(inputStream));
 
-
                 while ((line = reader.readLine()) != null) {
                     buffer.append(line + "\n");
                 }
@@ -147,7 +165,7 @@ public class ForecastFragment extends Fragment {
                 forecastJsonStr = buffer.toString();
 
                 // Verbose log statement to verify the async task returns something.
-                Log.v(LOG_TAG, "Forecast json string: " + forecastJsonStr);
+                //Log.v(LOG_TAG, "Forecast json string: " + forecastJsonStr);
 
             } catch (IOException e) {
                 Log.e(LOG_TAG, "Error ", e);

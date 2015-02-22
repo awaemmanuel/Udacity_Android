@@ -1,5 +1,6 @@
 package com.example.bigsleek.sunshine.app;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,8 +13,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +32,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static android.view.Gravity.CENTER_VERTICAL;
 
 /**
  * Created by BigSleek on 2/12/15.
@@ -108,6 +113,23 @@ public class ForecastFragment extends Fragment {
         listView = (ListView)
                 rootView.findViewById(R.id.listview_forecast);
         listView.setAdapter(mForecastAdapter);
+
+        // Add a list item onClickListener to interact with the list view when clicked.
+        listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                // Retrieve the application context and pass it to the toast
+                Toast toast = Toast.makeText(getActivity(),
+                        mForecastAdapter.getItem(position).toString(),
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(CENTER_VERTICAL, 0, 0);
+                toast.show();
+
+                startActivity(new Intent(getActivity(), DetailActivity.class));
+            }
+        });
 
         return rootView;
     }

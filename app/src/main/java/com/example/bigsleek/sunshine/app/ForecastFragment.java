@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,8 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static android.view.Gravity.CENTER_VERTICAL;
 
 /**
  * Created by BigSleek on 2/12/15.
@@ -120,12 +117,10 @@ public class ForecastFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // Retrieve the application context and pass it to the toast
-                Toast toast = Toast.makeText(getActivity(),
-                        mForecastAdapter.getItem(position).toString(),
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(CENTER_VERTICAL, 0, 0);
-                toast.show();
+                /**
+                 * Start DetailedActivity Fragment with forecast
+                 * information from listview
+                 */
 
                 startActivity(new Intent(getActivity(), DetailActivity.class)
                 .putExtra(Intent.EXTRA_TEXT, mForecastAdapter.getItem(position).toString()));

@@ -127,7 +127,8 @@ public class ForecastFragment extends Fragment {
                 toast.setGravity(CENTER_VERTICAL, 0, 0);
                 toast.show();
 
-                startActivity(new Intent(getActivity(), DetailActivity.class));
+                startActivity(new Intent(getActivity(), DetailActivity.class)
+                .putExtra(Intent.EXTRA_TEXT, mForecastAdapter.getItem(position).toString()));
             }
         });
 

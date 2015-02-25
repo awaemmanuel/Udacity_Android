@@ -1,15 +1,15 @@
 package com.example.bigsleek.sunshine.app;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.TextView;
 
 
 public class DetailActivity extends ActionBarActivity {
@@ -59,7 +59,19 @@ public class DetailActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+            /*
+             * Retrieve intent from main activity
+             * Retrieve the forecast string
+             * Find rootview, then find the detail_text node.
+             * Set text
+             */
+            Intent intent = getActivity().getIntent();
             View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
+            if (intent != null && intent.hasExtra(intent.EXTRA_TEXT)) {
+                String forecast = intent.getStringExtra(intent.EXTRA_TEXT);
+                ((TextView) rootView.findViewById(R.id.detail_text)).setText(forecast);
+            }
+
             return rootView;
         }
     }

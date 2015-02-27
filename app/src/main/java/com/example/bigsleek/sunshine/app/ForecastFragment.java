@@ -1,9 +1,11 @@
 package com.example.bigsleek.sunshine.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.format.Time;
 import android.util.Log;
@@ -65,7 +67,12 @@ public class ForecastFragment extends Fragment {
 
         if (id == R.id.action_refresh) {
             FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
-            fetchWeatherTask.execute("02453");
+
+            // Create a reference to a sharedpreference and retrieve location preference
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String location = preferences.getString(getString(R.string.pref_location_key),
+                    getString(R.string.pref_location_default));
+            fetchWeatherTask.execute(location);
             return true;
         }
         return super.onOptionsItemSelected(item);

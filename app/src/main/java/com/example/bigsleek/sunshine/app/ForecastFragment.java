@@ -31,8 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by BigSleek on 2/12/15.
@@ -80,6 +78,7 @@ public class ForecastFragment extends Fragment {
              *  Now that we have some dummy data forecast,
              *  1. Create ArrayAdapter
              *  2. Give it a data source arraylist to populate the ListView it's attached to.
+             *  3. Source is from the location preference.
              */
 
         mForecastAdapter =
@@ -119,6 +118,7 @@ public class ForecastFragment extends Fragment {
     // Private class that fetches weather data via an Async tax and populate
     // list view
     private void updateWeather() {
+
         FetchWeatherTask fetchWeatherTask = new FetchWeatherTask();
 
         // Create a reference to a sharedpreference and retrieve location preference
@@ -130,6 +130,7 @@ public class ForecastFragment extends Fragment {
 
     /**
      * Override onstart method with update weather as well.
+     * Get location preference weather data
      */
     @Override
     public void onStart() {

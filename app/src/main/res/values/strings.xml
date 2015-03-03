@@ -24,6 +24,10 @@
     <string name="action_map" translatable="false">Map Location</string>
     <string name="title_map_location">Map Location</string>
 
+    <!-- Menu label for share intent -->
+    <string name="action_share" translatable="false">Share</string>
+
+
     <!-- Label for the location preference [CHAR LIMIT=30] -->
     <string name="pref_location_label">Location</string>
 

@@ -19,8 +19,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.android.sunshine.app.data.WeatherContract.LocationEntry;
-import com.example.android.sunshine.app.data.WeatherContract.WeatherEntry;
+import com.example.bigsleek.sunshine.app.data.WeatherContract.LocationEntry;
+import com.example.bigsleek.sunshine.app.data.WeatherContract.WeatherEntry;
 
 /**
  * Manages a local database for weather data.
@@ -72,13 +72,13 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
 
         // Create location table
         final String SQL_CREATE_LOCATION_TABLE = "CREATE TABLE " + LocationEntry.TABLE_NAME +
-                " ( " +
-                LocationEntry._ID  + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                LocationEntry.COLUMN_CITY_NAME + "TEXT NOT NULL, " +
-                LocationEntry.COLUMN_COORD_LAT + "REAL NOT NULL, " +
-                LocationEntry.COLUMN_COORD_LONG + "REAL NOT NULL, " +
-                LocationEntry.COLUMN_LOCATION_SETTINGS + "TEXT NOT NULL"
-                + " )";
+                " (" +
+                LocationEntry._ID  + " INTEGER PRIMARY KEY," +
+                LocationEntry.COLUMN_LOCATION_SETTING + " TEXT UNIQUE NOT NULL, " +
+                LocationEntry.COLUMN_CITY_NAME + " TEXT NOT NULL, " +
+                LocationEntry.COLUMN_COORD_LAT + " REAL NOT NULL, " +
+                LocationEntry.COLUMN_COORD_LONG + " REAL NOT NULL " +
+                " );";
 
         // Execute SQL created
         sqLiteDatabase.execSQL(SQL_CREATE_LOCATION_TABLE);

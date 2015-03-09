@@ -27,7 +27,7 @@ public class TestDb extends AndroidTestCase {
 
     // Since we want each test to start with a clean slate
     void deleteTheDatabase() {
-        mContext.deleteDatabase(com.example.android.sunshine.app.data.WeatherDbHelper.DATABASE_NAME);
+        mContext.deleteDatabase(com.example.bigsleek.sunshine.app.data.WeatherDbHelper.DATABASE_NAME);
     }
 
     /*
@@ -52,11 +52,11 @@ public class TestDb extends AndroidTestCase {
         // Note that there will be another table in the DB that stores the
         // Android metadata (db version information)
         final HashSet<String> tableNameHashSet = new HashSet<String>();
-        tableNameHashSet.add(com.example.android.sunshine.app.data.WeatherContract.LocationEntry.TABLE_NAME);
-        tableNameHashSet.add(com.example.android.sunshine.app.data.WeatherContract.WeatherEntry.TABLE_NAME);
+        tableNameHashSet.add(com.example.bigsleek.sunshine.app.data.WeatherContract.LocationEntry.TABLE_NAME);
+        tableNameHashSet.add(com.example.bigsleek.sunshine.app.data.WeatherContract.WeatherEntry.TABLE_NAME);
 
-        mContext.deleteDatabase(com.example.android.sunshine.app.data.WeatherDbHelper.DATABASE_NAME);
-        SQLiteDatabase db = new com.example.android.sunshine.app.data.WeatherDbHelper(
+        mContext.deleteDatabase(com.example.bigsleek.sunshine.app.data.WeatherDbHelper.DATABASE_NAME);
+        SQLiteDatabase db = new com.example.bigsleek.sunshine.app.data.WeatherDbHelper(
                 this.mContext).getWritableDatabase();
         assertEquals(true, db.isOpen());
 
@@ -77,7 +77,7 @@ public class TestDb extends AndroidTestCase {
                 tableNameHashSet.isEmpty());
 
         /* now, do our tables contain the correct columns? */
-        c = db.rawQuery("PRAGMA table_info(" + com.example.android.sunshine.app.data.WeatherContract.LocationEntry.TABLE_NAME + ")",
+        c = db.rawQuery("PRAGMA table_info(" + com.example.bigsleek.sunshine.app.data.WeatherContract.LocationEntry.TABLE_NAME + ")",
                 null);
 
         assertTrue("Error: This means that we were unable to query the database for table information.",
@@ -85,11 +85,11 @@ public class TestDb extends AndroidTestCase {
 
         // Build a HashSet of all of the column names we want to look for
         final HashSet<String> locationColumnHashSet = new HashSet<String>();
-        locationColumnHashSet.add(com.example.android.sunshine.app.data.WeatherContract.LocationEntry._ID);
-        locationColumnHashSet.add(com.example.android.sunshine.app.data.WeatherContract.LocationEntry.COLUMN_CITY_NAME);
-        locationColumnHashSet.add(com.example.android.sunshine.app.data.WeatherContract.LocationEntry.COLUMN_COORD_LAT);
-        locationColumnHashSet.add(com.example.android.sunshine.app.data.WeatherContract.LocationEntry.COLUMN_COORD_LONG);
-        locationColumnHashSet.add(com.example.android.sunshine.app.data.WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING);
+        locationColumnHashSet.add(com.example.bigsleek.sunshine.app.data.WeatherContract.LocationEntry._ID);
+        locationColumnHashSet.add(com.example.bigsleek.sunshine.app.data.WeatherContract.LocationEntry.COLUMN_CITY_NAME);
+        locationColumnHashSet.add(com.example.bigsleek.sunshine.app.data.WeatherContract.LocationEntry.COLUMN_COORD_LAT);
+        locationColumnHashSet.add(com.example.bigsleek.sunshine.app. data.WeatherContract.LocationEntry.COLUMN_COORD_LONG);
+        locationColumnHashSet.add(com.example.bigsleek.sunshine.app.data.WeatherContract.LocationEntry.COLUMN_LOCATION_SETTING);
 
         int columnNameIndex = c.getColumnIndex("name");
         do {
@@ -111,22 +111,6 @@ public class TestDb extends AndroidTestCase {
         also make use of the ValidateCurrentRecord function from within TestUtilities.
     */
     public void testLocationTable() {
-        // First step: Get reference to writable database
-
-        // Create ContentValues of what you want to insert
-        // (you can use the createNorthPoleLocationValues if you wish)
-
-        // Insert ContentValues into database and get a row ID back
-
-        // Query the database and receive a Cursor back
-
-        // Move the cursor to a valid database row
-
-        // Validate data in resulting Cursor with the original ContentValues
-        // (you can use the validateCurrentRecord function in TestUtilities to validate the
-        // query if you like)
-
-        // Finally, close the cursor and database
 
     }
 
@@ -170,6 +154,7 @@ public class TestDb extends AndroidTestCase {
         testWeatherTable and testLocationTable.
      */
     public long insertLocation() {
+       
         return -1L;
     }
 }

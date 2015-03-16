@@ -50,9 +50,9 @@
     <string name="pref_units_key" translatable="false">units</string>
 
     <!-- Value in SharedPreferences for metric temperature unit option [CHAR LIMIT=NONE] -->
-    <string name="pref_units_metric" translatable="false">metric</string>
+    <string name="pref_units_metric" translatable="false">\u2103</string>
 
     <!-- Value in SharedPreferences for imperial temperature unit option [CHAR LIMIT=NONE] -->
-    <string name="pref_units_imperial" translatable="false">imperial</string>
+    <string name="pref_units_imperial" translatable="false">\u2109</string>
 
 </resources>

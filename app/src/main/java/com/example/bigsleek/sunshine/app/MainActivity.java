@@ -60,9 +60,7 @@ public class MainActivity extends ActionBarActivity {
      * Helper function to implicitly start an intent that maps the preferred location on map
      */
     private void openPreferredLocationToMap() {
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String location = sharedPreferences.getString(getString(R.string.pref_location_key),
-                getString(R.string.pref_location_default));
+        String location = Utility.getPreferredLocation(this);
 
         /**
          * Using the URI scheme for showing a location found on a map

@@ -23,11 +23,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.bigsleek.sunshine.app.ForecastFragment;
-import com.example.bigsleek.sunshine.app.R;
-import com.example.bigsleek.sunshine.app.SettingsActivity;
-import com.example.bigsleek.sunshine.app.Utility;
-
 public class MainActivity extends ActionBarActivity {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();

@@ -54,6 +54,10 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
             mTwoPane = false;
         }
 
+        /**
+         * Plumbing through from MainActivity to ForecastAdapter
+         * to decide what listview to use for phone or tablet.
+         */
         ForecastFragment forecastFragment = ((ForecastFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_forecast));
         forecastFragment.setUseTodayLayout(!mTwoPane);

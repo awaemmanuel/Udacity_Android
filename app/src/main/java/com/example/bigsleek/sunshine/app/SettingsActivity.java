@@ -25,6 +25,8 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
+import static com.example.bigsleek.sunshine.app.sync.SunshineSyncAdapter.syncImmediately;
+
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
  * <p>
@@ -84,6 +86,7 @@ public class SettingsActivity extends PreferenceActivity
             // For other preferences, set the summary to the value's simple string representation.
             preference.setSummary(stringValue);
         }
+        syncImmediately(getApplicationContext());
         return true;
     }
 

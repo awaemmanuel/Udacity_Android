@@ -49,6 +49,7 @@ public class MyView extends View {
         setMeasuredDimension(myWidth, myHeight);
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

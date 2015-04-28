@@ -18,19 +18,23 @@ package com.example.bigsleek.sunshine.app;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.bigsleek.sunshine.app.sync.SunshineSyncAdapter;
 
-public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback {
+public class MainActivity extends ActionBarActivity implements ForecastFragment.Callback, SwipeRefreshLayout.OnRefreshListener {
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String DETAILFRAGMENT_TAG = "DFTAG";
 
     private boolean mTwoPane;
     private String mLocation;
+    private SwipeRefreshLayout swipeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,51 @@ public class MainActivity extends ActionBarActivity implements ForecastFragment.
                 .findFragmentById(R.id.fragment_forecast));
         forecastFragment.setUseTodayLayout(!mTwoPane);
 
+        /* Get swipeRefreshLayout and assign listener for update */
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        swipeLayout.setOnRefreshListener(this);
+        swipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        swipeLayout.canChildScrollUp();
+
+
         SunshineSyncAdapter.initializeSyncAdapter(this);
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                hideSwipeProgress();
+                Log.d(LOG_TAG, "onRefresh Called");
+                SunshineSyncAdapter.syncImmediately(getApplicationContext());
+                Log.d(LOG_TAG, "Sync Called after onRefresh");
+            }
+        }, 5000);
+    }
+
+    /* To avoid showing progress */
+    public void showSwipeProgress() {
+        swipeLayout.setRefreshing(true);
+    }
+
+
+    /* To avoid showing progress */
+    public void hideSwipeProgress() {
+        swipeLayout.setRefreshing(false);
+    }
+
+    /* Enable swipe gesture */
+    public void enableSwipeGesture() {
+        swipeLayout.setEnabled(true);
+    }
+
+    /* To disable swipe gesture, this prevents manual gestures but can be started programmatically */
+    public void disableSwipeGesture() {
+        swipeLayout.setEnabled(false);
     }
 
     @Override

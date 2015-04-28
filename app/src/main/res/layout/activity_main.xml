@@ -6,3 +6,4 @@
     android:layout_height="match_parent"
     tools:context="com.example.bigsleek.sunshine.app.ForecastFragment"
     tools:layout="@android:layout/list_content" />
+
